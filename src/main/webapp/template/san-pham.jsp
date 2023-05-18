@@ -1,32 +1,18 @@
 <%@ page import="model.User"%>
 <%@ page import="model.Product"%>
 <%@ page import="java.util.List"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
 <!-- 9. Hiển thị trang sản phẩm -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <title>G15 | Sản phẩm</title>
-
 <link rel="stylesheet" href="../themes/css1/product.css">
-
-
 </head>
-
 <body>
 	<!-- header -->
-
-
 	<%@ include file="header.jsp"%>
-
-
-
 	<!-- product_page -->
 	<main id="product_page">
 		<div class="container">
@@ -38,7 +24,6 @@
 				</div>
 				<h1>Sản phẩm</h1>
 			</div>
-
 			<!-- container listproduct -->
 			<div class="d-flex">
 				<!-- menu bar product -->
@@ -100,8 +85,6 @@
 								<div class="collapse show" id="collapseSaleoff">
 									<ul>
 										<li><a href="sale-off.jsp">Giá Siêu đặc biệt</a></li>
-
-
 										<li><a href="#">Áo dài</a></li>
 										<li><a href="#">Vest</a></li>
 										<li><a href="#">Chân váy</a></li>
@@ -134,7 +117,6 @@
 							<!-- list product -->
 							<div class="products">
 								<div id="page_prods" class="row--grid">
-
 									<%
 									List<Product> list = (List<Product>) request.getAttribute("listproduct");
 									for (Product p : list) {
@@ -161,9 +143,7 @@
 												<button class="btn btn-like" value="ak3"
 													title="Thêm vào mục yêu thích">
 													<i class="fas fa-heart"></i>
-
 												</button>
-
 												<form action="/cart/add-to-cart" method="POST">
 													<input name="ismeasure" type="hidden" value="0"> <input
 														name="id" type="hidden" value="<%=p.getIdproduct()%>">
@@ -190,19 +170,9 @@
 			</div>
 		</div>
 	</main>
-
 	<!-- footer -->
-
-
 	<%@ include file="footer.jsp"%>
-
-
-
 	<!-- js -->
-
-
 	<script src="../themes/js/paginateProducts.js"></script>
-
 </body>
-
 </html>

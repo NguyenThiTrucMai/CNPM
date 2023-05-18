@@ -26,13 +26,12 @@ public class UserService {
 		}
 		return instance;
 	}
-
+	// 1.1 UserService lấy thông tin người dùng qua database (Hiếu)
 	public static List<User> getData() {
 		return JDBIConnector.get().withHandle(handle -> {
 			return handle.createQuery("select * from user").mapToBean(User.class).stream().collect(Collectors.toList());
 		});
 	}
-
 	public static User getUserByEmail(String email) {
 		List<User> users = JDBIConnector.get()
 				.withHandle(h -> h.createQuery("select * from user where email = ? and status = 1").bind(0, email)
@@ -41,25 +40,26 @@ public class UserService {
 			return null;
 		return users.get(0);
 	}
-
+	//2.1 UserService lấy thông tin từ database để check coi tên người dùng có tồn tại chưa (Hiếu)
 	public static boolean checkUserNameExist(String username) {
 		List<User> users = JDBIConnector.get()
 				.withHandle(h -> h.createQuery("select * from user where username = ? and status = 1").bind(0, username)
 						.mapToBean(User.class).stream().collect(Collectors.toList()));
 		if (users.size() == 0)
+			//2.2 Nếu tên người dùng trùng thì trả lại kết quả là false (Hiếu)
 			return false;
 		return true;
 	}
 
 	public static User dangNhap(String username, String password) {
-		// 7. Hệ thống kiểm tra dữ liệu ở Database
+		// 7. Hệ thống kiểm tra dữ liệu ở Database (Mai)
 		List<User> users = JDBIConnector.get()
 				.withHandle(h -> h.createQuery("select * from user where username = ? and status = 1").bind(0, username)
 						.mapToBean(User.class).stream().collect(Collectors.toList()));
 		if (users.size() == 0)
 			return null;
 		User user = users.get(0);
-		// mật khẩu lưu db có mã hóa
+		// mật khẩu lưu db có mã hóa (Mai)
 		if (!user.getPassword().equals(hashPassword(password)))
 			return null;
 		return user;
@@ -78,8 +78,8 @@ public class UserService {
 		}
 	}
 
-	// đăng ký user
-	// thêm mới user - admin chủ động setup là admin hay kh nên không cần set role
+	// đăng ký user (Mai)
+	// thêm mới user - admin chủ động setup là admin hay kh nên không cần set role (Mai)
 	public static int addRegister(User input) {
 		String pass = hashPassword(input.getPassword());// để bảo mật thì cần hash mật khẩu trước khi lưu
 		input.setPassword(pass);// lưu password đã được mã hóa để bảo mật
@@ -110,7 +110,7 @@ public class UserService {
 			return 0;
 		}
 	}
-
+	// 3.1 UserService bắt đầu cập nhật dữ liệu người dùng trong database (Hiếu)
 	public static boolean updateUserByIdUser(int userId, User user) {
 		// query > insert
 		String query = "update user set lastname=?, firstname=?, username=?, email=?, phone=? where iduser = ? and status = 1";
@@ -141,7 +141,7 @@ public class UserService {
 		return false;
 	}
 
-	// gửi phản hồi cho đăng ký nhận thông báo ở footer
+	// gửi phản hồi cho đăng ký nhận thông báo ở footer (Mai)
 	public boolean getMailNotify(String email) {
 		String qCheckUser = "SELECT firstname, lastname, username FROM `user` WHERE email=?";
 		List<User> users = JDBIConnector.get().withHandle(handle -> handle.createQuery(qCheckUser).bind(0, email)
@@ -164,7 +164,7 @@ public class UserService {
 		return false;
 	}
 
-	// Gửi email xác nhận đặt lịch hẹn
+	// Gửi email xác nhận đặt lịch hẹn (Mai)
 	public boolean getMailContact(String name, String email, String phone, String date, String msg) {
 		String qCheckUser = "SELECT firstname, lastname, username FROM `user` WHERE email=?";
 		List<User> users = JDBIConnector.get().withHandle(handle -> handle.createQuery(qCheckUser).bind(0, email)
@@ -187,7 +187,7 @@ public class UserService {
 		return false;
 	}
 
-	// send-mail reset password
+	// send-mail reset password (Mai)
 	public boolean passwordRecovery(String email) {
 		User user = getUserByEmail(email);
 		if (user != null) {

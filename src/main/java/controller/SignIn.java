@@ -21,7 +21,6 @@ public class SignIn extends HttpServlet {
 		request.getRequestDispatcher("template/dang-nhap.jsp").forward(request, response);
 		return;
 	}
-
 	// SignIn sẽ gọi UserService để thực hiện kiểm tra
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,10 +37,7 @@ public class SignIn extends HttpServlet {
 		// 6.Hệ thống gọi dangNhap() để lấy thông tin
 		User user = UserService.dangNhap(username, password);
 		if (user == null) {
-			
 //			7.1 Hiển thị thông báo tên đăng nhập và password không hợp lệ
-
-
 			request.setAttribute("error", "Username or password is incorrect");// truyền kèm theo biến
 			// .forward(request, response) khi muốn truyền tất cả input truyền sang trang kế
 			// tiếp
@@ -54,8 +50,7 @@ public class SignIn extends HttpServlet {
 			session.setAttribute("userLogin", user);// lưu thông tin của user vào trường auth trên session
 			if (user.getRole() == Contants.ROLE_CUSTOMER) {
 				System.out.println("addressDefault");
-																// khi mua hàng
-
+				// khi mua hàng
 				// 8. Thông tin tài khoản đã tồn tại trong database sẽ chuyển đến trang Sản phẩm
 				response.sendRedirect("/products");// goi api lấy danh sách sản phẩm
 			} else if (user.getRole() == Contants.ROLE_ADMIN) {
