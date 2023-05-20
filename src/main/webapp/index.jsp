@@ -5,166 +5,116 @@
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- 1. Người dùng truy cập vào website (Mai)-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>G15 | Trang chủ</title>
-    <link rel="stylesheet" href="/themes/css1/product.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G15 | Đăng nhập</title>
-    <link rel="shortcut icon" href="/images/logo-new.jpg" type="image/x-icon">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="libs/glider.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-        integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE+5cnGmlw8JT03QB2+oxL100UeB6RlzZLUxCGSS4/++mNZdxw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="libs/jquery.exzoom.min.css">
-    <link rel="stylesheet" href="/themes/css/main.css">
-    <link rel="stylesheet" href="/themes/css/style_section.css">
-    <link rel="stylesheet" href="/themes/css1/menu.css">
-</head>
-<%-- 1. Người dùng truy cập vào trang chủ (Sau khi đã đăng nhập) (Hiếu)--%>
-<body>
-<%--    1.1 Người dùng truy cập vào trang thông tin khách hàng thông qua Header (Hiếu)--%>
-<!-- header -->
-<header id="header">
-    <div class="container">
-        <div class="d-flex  align-items-center">
-            <div class="col col-md-2">
-                <a href="/index.jsp"> <img src="../images/logo-new.jpg" alt=""
-                        width="150" id="logo" />
-                </a>
-            </div>
-            <div class="col col-md-10">
-                <div id="top-head">
-                    <div class="d-flex">
-                        <div class="col col-md-2 col-sm-12"></div>
-                        <div class="col col-md-5 col-sm-12">
-                            <form id="searchBox" action="./search" method="get">
-                                <div class="form-group d-flex">
-                                    <input type="text" name="txtSearch" id="searchInput"
-                                        class="form-control"
-                                        placeholder="Bạn cần tìm..."
-                                        aria-describedby="helpId"
-                                        oninput="searchByName(this)" />
-                                    <ul id="result_search_box"></ul>
-                                    <button type="submit" class="btn" id="searchBtn">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- 2. Nhấn vào nút "Đăng nhập" ở góc trên bên phải màn hình của trang chủ (Mai)-->
-                        <!-- Thông tin khi đăng nhập (Mai)-->
-                        <div class="col-md-5 col-sm-12">
-                            <ul class="d-flex">
-                                <% User auth=(User) session.getAttribute("userLogin");
-                                    if (auth==null) { %>
-                                    <li>
-                                        <!-- <img src="images/icon_dang_nhap.png" alt="" /> -->
-                                        <a href="/template/dang-nhap.jsp"
-                                            class='fas fa-user-alt'> <span
-                                                id="get_name_user">Đăng nhập</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <!-- <img src="images/icon_dang_nhap.png" alt="" /> -->
-                                        <a href="/template/dang-ky.jsp"
-                                            class='fas fa-user-alt'> <span
-                                                id="get_name_user">Đăng ký</span></a>
-                                    </li>
-                                    <% } else { %>
-                                        <div class="nav-item dropdown">
-                                            <a href="../khach-hang.jsp"
-                                                class="nav-link dropdown-toggle show"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="true"> <img
-                                                    class="rounded-circle me-lg-2"
-                                                    src="../images/profie.png" alt=""
-                                                    style="width: 40px; height: 40px;">
-                                                <span class="d-none d-lg-inline-flex">
-                                                    <%=auth.getUsername()%>
-                                                </span>
-                                            </a>
-                                            <!-- có chữ show nó sẽ show ra (Mai)-->
-                                            <!-- <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0 show" data-bs-popper="none"> -->
-                                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0 "
-                                                data-bs-popper="none">
-<%--                                                    1.2 Người dùng bấm vào để truy cập vào trang quản lý tài khoản (Hiếu)--%>
-                                                <a href="/thong-tin-khach-hang/quan-ly-tai-khoan.jsp"
-                                                    class="dropdown-item">Tài khoản</a>
-                                                <hr>
-                                                <!-- <a href="khach-hang.jsp"  class="dropdown-item"  >Cài đặt</a> -->
-                                                <a href="/sign-out"
-                                                    class="dropdown-item">Đăng suất</a>
-                                            </div>
-                                        </div>
-                                        <!-- -- -->
-                                        <!-- Thông tin khi đăng nhập -->
-                                <% } %>
-                            </ul>
-                        </div>
-                        <!-- end Thông tin khi đăng nhập -->
-                    </div>
+            <!-- 1
+. Người dùng truy cập vào website (mainguyen) -->
+                <!DOCTYPE html>
+                <html lang="en">
+
+                <head>
+
+                    <title>G15 | Trang chủ</title>
+
+
+
+
+                    <link rel="stylesheet" href="/themes/css1/product.css">
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>G15 | Đăng nhập</title>
+                    <link rel="shortcut icon" href="/images/logo-new.jpg" type="image/x-icon">
+
+                    <!-- CSS only -->
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+                        rel="stylesheet"
+                        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+                        crossorigin="anonymous">
+                    <link rel="stylesheet" href="libs/glider.css">
+                    <link rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+                        integrity="sha512-L7MWcK7FNPcwNqnLdZq86lTHYLdQqZaz5YcAgE+5cnGmlw8JT03QB2+oxL100UeB6RlzZLUxCGSS4/++mNZdxw=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer" />
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap"
+                        rel="stylesheet">
+
+
+                    <link rel="stylesheet" href="libs/jquery.exzoom.min.css">
+
+                    <link rel="stylesheet" href="/themes/css/main.css">
+                    <link rel="stylesheet" href="/themes/css/style_section.css">
+                    <link rel="stylesheet" href="/themes/css1/menu.css">
+                </head>
+
+                <body>
+                    <!-- header -->
+
+                 
+	<!-- header -->
+    <header id="header">
+        <div class="container">
+            <div class="d-flex  align-items-center">
+                <div class="col col-md-2">
+                    <a href="/index.jsp"> <img src="../images/logo-new.jpg" alt=""
+                            width="150" id="logo" />
+                    </a>
                 </div>
                 <div id="sidebar">
                     <div class="container">
                         <div class="d-flex">
-                            <div class="col-md-12">
-                                <ul class="menu d-flex">
-                                    <li class="menu-item"><a
-                                            href="/template/ve-chung-toi.jsp"
-                                            class="d-flex">
-                                            <h4>GIỚI THIỆU</h4>
-                                        </a></li>
-                                    <li class="menu-item"><a href="/products"
-                                            class="d-flex">
-                                            <h4>SẢN PHẨM</h4> <i
-                                                class="fas fa-chevron-down"></i>
-                                            <div class="menu-sub">
-                                                <!-- <ul> -->
-                                                <a href="/productsByCode?code=da-hoi"
-                                                    class="menu-link d-flex">
-                                                    <h5>VÁY DẠ HỘI</h5>
-                                                </a> <a
-                                                    href="/productsByCode?code=ao-dai"
-                                                    class="menu-link d-flex">
-                                                    <h5>ÁO DÀI</h5>
-                                                </a> <a
-                                                    href="/productsByCode?code=dam-vay"
-                                                    class="menu-link d-flex">
-                                                    <h5>ĐẦM, VÁY</h5>
-                                                </a> <a href="/productsByCode?code=vest"
-                                                    class="menu-link d-flex">
-                                                    <h5>VEST</h5>
-                                                </a> <a
-                                                    href="/productsByCode?code=chan-vay"
-                                                    class="menu-link d-flex">
-                                                    <h5>CHÂN VÁY</h5>
-                                                </a> <a href="/productsByCode?code=quan"
-                                                    class="menu-link d-flex">
-                                                    <h5>QUẦN</h5>
-                                                </a> <a
-                                                    href="/productsByCode?code=set-do"
-                                                    class="menu-link d-flex">
-                                                    <h5>SET ĐỒ</h5>
-                                                </a> <a
-                                                    href="/productsByCode?code=ao-khoac"
-                                                    class="menu-link d-flex">
-                                                    <h5>ÁO KHOÁC</h5>
+                            <div class="col col-md-2 col-sm-12"></div>
+                            <div class="col col-md-5 col-sm-12">
+                                <form id="searchBox" action="./search" method="get">
+                                    <div class="form-group d-flex">
+                                        <input type="text" name="txtSearch" id="searchInput"
+                                            class="form-control"
+                                            placeholder="Bạn cần tìm..."
+                                            aria-describedby="helpId"
+                                            oninput="searchByName(this)" />
+                                        <ul id="result_search_box"></ul>
+                                        <button type="submit" class="btn" id="searchBtn">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- 2. Nhấn vào nút "Đăng nhập" ở góc trên bên phải màn hình của trang chủ  (mainguyen)-->
+                            <!-- Thong tin khi ddang nhaap -->
+                            <div class="col-md-5 col-sm-12">
+                                <ul class="d-flex">
+                                    <% User auth=(User) session.getAttribute("userLogin");
+                                        if (auth==null) { %>
+
+                                        <li>
+                                            <!-- <img src="images/icon_dang_nhap.png" alt="" /> -->
+                                            <a href="/template/dang-nhap.jsp"
+                                                class='fas fa-user-alt'> <span
+                                                    id="get_name_user">Đăng nhập</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <!-- <img src="images/icon_dang_nhap.png" alt="" /> -->
+                                            <a href="/template/dang-ky.jsp"
+                                                class='fas fa-user-alt'> <span
+                                                    id="get_name_user">Đăng ký</span></a>
+                                        </li>
+                                        <% } else { %>
+
+
+                                            <div class="nav-item dropdown">
+                                                <a href="../khach-hang.jsp"
+                                                    class="nav-link dropdown-toggle show"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="true"> <img
+                                                        class="rounded-circle me-lg-2"
+                                                        src="../images/profie.png" alt=""
+                                                        style="width: 40px; height: 40px;">
+                                                    <span class="d-none d-lg-inline-flex">
+                                                        <%=auth.getUsername()%>
+                                                    </span>
                                                 </a>
                                                 <!-- </ul> -->
                                             </div>

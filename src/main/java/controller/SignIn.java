@@ -25,7 +25,7 @@ public class SignIn extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//5. Hệ thống lấy dữ liệu và kiểm tra dữ liệu nhập
+//5. Hệ thống lấy dữ liệu và kiểm tra dữ liệu nhập  (mainguyen)
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println(username);
@@ -34,10 +34,12 @@ public class SignIn extends HttpServlet {
 		// UserService sẽ vào database tìm result set có tài khoản và mật khẩu tương ứng
 		// để trả về
 
-		// 6.Hệ thống gọi dangNhap() để lấy thông tin
+		// 6.Hệ thống gọi dangNhap() để lấy thông tin   (mainguyen)
 		User user = UserService.dangNhap(username, password);
 		if (user == null) {
-//			7.1 Hiển thị thông báo tên đăng nhập và password không hợp lệ
+			
+//			7.1 Hiển thị thông báo tên đăng nhập và password không hợp lệ   (mainguyen)
+      
 			request.setAttribute("error", "Username or password is incorrect");// truyền kèm theo biến
 			// .forward(request, response) khi muốn truyền tất cả input truyền sang trang kế
 			// tiếp
@@ -50,8 +52,8 @@ public class SignIn extends HttpServlet {
 			session.setAttribute("userLogin", user);// lưu thông tin của user vào trường auth trên session
 			if (user.getRole() == Contants.ROLE_CUSTOMER) {
 				System.out.println("addressDefault");
-				// khi mua hàng
-				// 8. Thông tin tài khoản đã tồn tại trong database sẽ chuyển đến trang Sản phẩm
+																// khi mua hàng
+				// 8. Thông tin tài khoản đã tồn tại trong database sẽ chuyển đến trang Sản phẩm   (mainguyen)
 				response.sendRedirect("/products");// goi api lấy danh sách sản phẩm
 			} else if (user.getRole() == Contants.ROLE_ADMIN) {
 				response.sendRedirect("/quan-tri-admin/indexAdmin.jsp");

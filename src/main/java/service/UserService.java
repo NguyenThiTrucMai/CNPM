@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	public static User dangNhap(String username, String password) {
-		// 7. Hệ thống kiểm tra dữ liệu ở Database (Mai)
+		// 7. Hệ thống kiểm tra dữ liệu ở Database   (mainguyen)
 		List<User> users = JDBIConnector.get()
 				.withHandle(h -> h.createQuery("select * from user where username = ? and status = 1").bind(0, username)
 						.mapToBean(User.class).stream().collect(Collectors.toList()));

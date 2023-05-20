@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<!-- 3. Hệ thống hiển thị trang đăng nhập -->
+<!-- 3. Hệ thống hiển thị trang đăng nhập  (mainguyen)-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="col-md-7 right">
 						<h1 class="text-center mb-3">Đăng nhập</h1>
-						<!-- 4. Người dùng nhập tên đăng nhập và mật khẩu đã có vào form sign-in -->
+						<!-- 4. Người dùng nhập tên đăng nhập và mật khẩu đã có vào form sign-in  (mainguyen)-->
 						<form class="frm_login" action="/sign-in" method="POST">
 							<div class="row">
 								<div class="col-sm-12">
