@@ -8,7 +8,7 @@
 
 
 
-            <!-- 1. Người dùng truy cập vào website -->
+            <!-- 1. Người dùng truy cập vào website (mainguyen) -->
                 <!DOCTYPE html>
                 <html lang="en">
 
@@ -83,7 +83,7 @@
                                 </form>
                             </div>
 
-                            <!-- 2. Nhấn vào nút "Đăng nhập" ở góc trên bên phải màn hình của trang chủ -->
+                            <!-- 2. Nhấn vào nút "Đăng nhập" ở góc trên bên phải màn hình của trang chủ  (mainguyen)-->
                             <!-- Thong tin khi ddang nhaap -->
                             <div class="col-md-5 col-sm-12">
                                 <ul class="d-flex">

@@ -6,7 +6,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-<!-- 9. Hiển thị trang sản phẩm -->
+<!-- 9. Hiển thị trang sản phẩm   (mainguyen) -->
 <!DOCTYPE html>
 <html lang="en">
 
